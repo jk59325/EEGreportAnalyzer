@@ -1,3 +1,4 @@
+"""
 # This program will read several formats of Stanford EEG reports (both adults and peds). It will extract the
 # impression block. Then it will score each sentence in the impression block. A large negative score indicates that
 # the sentence is more likely to be describing the presence of a seizure . A more positive score would indicate a
@@ -5,6 +6,18 @@
 #
 # The dict folder contains several yaml files that use contain words which are assigned scores that make the seizure
 # more or less likely.
+
+Packages are easily installed via conda. However special instructions pertain to spacy's installation:
+ First install microsoft visual studio version 25123 and the python package vs2015_runtime: 14.0.25123-0 
+ Then create a new environment with conda create --name py36 python=3. Then activate that environment. 
+ Then pip install -U spacy followed by python -m spacy download en
+If you are using Pycharm, you can't install spacy. You must change the python interpreter in the settings menu to the
+ py36 environment that you've just created. 
+
+2 csv files are required: SHC_ALL_NOTES_FILTERED.csv which has all the eeg procedure notes 
+NKdatabaseDump.csv which contains all the start and end times of each eeg file with their eeg exam number. 
+I've uploaded them to the patient_reports folder on stanford's box account
+"""
 
 from __future__ import print_function, division, absolute_import
 
