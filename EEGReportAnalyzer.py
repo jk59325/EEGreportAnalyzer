@@ -32,7 +32,7 @@ import codecs
 # *******************SETTINGS********************
 # input file name - a csv formatted file. one of the columns should be labelled as "note" and contain the entire
 # eeg report.
-file_name = "SHC_ALL_NOTES_FILTERED.csv"
+input_file_name = "SHC_ALL_NOTES_FILTERED.csv"
 # output file name - this file is the same as the input file with several additional columns
 # There will be a column "impression" which is the extracted impression block from the notes
 # There will be an notetype, duration, impressionType (sz, ed, dc), seizureScore, etc.
@@ -90,16 +90,16 @@ eegAbnormalityTypePattern2 = r'(?<!absence of)\s+(epileptiform)'
 
 
 
-def tsvTOcsv(file_name, out_file):
+def tsvTOcsv(input_file_name, out_file):
     """
     converts tsv formatted files to csv,
     used to make the csv file that is readable by this EEG report feature analyzer
-    :param file_name: a tsv file
+    :param input_file_name: a tsv file
     :param out_file: a csv file
     :return: 
     """
     i = 0
-    with open(file_name, 'rb') as tsvin, open(out_file, 'wb') as csvout:
+    with open(input_file_name, 'rb') as tsvin, open(out_file, 'wb') as csvout:
         tsvin = csv.reader(tsvin, delimiter='\t')
         csvout = csv.writer(csvout)
 
@@ -707,12 +707,12 @@ def masterCSV_daterange(examNO):
 
 def analyzeAllEEG():
     """
-    reads the entire table of eeg reports (file_name) which is a csv file and creates a new csv file with new columns
+    reads the entire table of eeg reports (input_file_name) which is a csv file and creates a new csv file with new columns
     which will include the likelihood score of it containing seizures/ed. 
     :return: nothing. this function writes to the outfile
     """
     i = 1
-    with open(file_name) as cf:
+    with open(input_file_name) as cf:
         # needed to replace null lines
         reader = csv.DictReader(x.replace('\0', '') for x in cf)
         # optional starting offset in case program crashes while analyzing
@@ -861,8 +861,8 @@ def analyzeAllEEG():
                 # print(eeg_no)
                 # if (i>600):
                 #    break
-    #close(file_name)
-    writer.close()
+    #close(input_file_name)
+    #writer.close()
 
 
 
